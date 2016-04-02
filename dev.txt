@@ -1,0 +1,1 @@
+"setup": "sequelize-auto -o './model' -d skilly -h localhost -u `echo $C9_USER|cut -c1-16` -p 3306 -e mysql"

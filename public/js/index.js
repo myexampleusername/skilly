@@ -1,0 +1,1 @@
+let domain = window.location.href.slice(0, -1);

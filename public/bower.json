@@ -1,0 +1,32 @@
+{
+  "name": "skilly",
+  "version": "1.0.0",
+  "homepage": "https://github.com/myexampleusername/skilly",
+  "authors": [
+    "john@operationspark.org"
+  ],
+  "description": "A wonderful showcase of your skillz",
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "skillz",
+    "parse"
+  ],
+  "license": "CC",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "lodash": "~3.10.1",
+    "bootstrap": "~3.3.6",
+    "bluebird": "~3.1.1"
+  }
+}
