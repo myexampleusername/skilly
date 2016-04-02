@@ -93,12 +93,7 @@ sequelize.sync().then(function(err) {
 
   app.route('/user/:id/twitter')
     .get(twitterService.get);
-    
-  app.get('/dashboard', function(req, res){
-    console.log(__dirname);
-    res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-  });
-    
+  
   server = app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() {
     var addr = server.address();
     console.log("Server listening at", addr.address + ":" + addr.port);
