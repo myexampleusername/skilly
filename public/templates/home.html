@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Home</h1>
+  
+  <ul class="users">
+    <li ng-repeat="user in users" class="thumbnail">
+      <a href="#/user/{{user.id}}/profile">{{user.nameFirst}} {{user.nameLast}}</a>
+    </li>
+  </ul>
+</div>

@@ -1,7 +1,15 @@
 'use strict';
 
+/**
+ * index.js: an express.js server for the skilly app.
+ * 
+ * START UP on Cloud9
+ * 
+ * 1. Run MySQL: mysql-ctl cli
+ * 2. Run npm run dev to watch and reboot server on changes, OR, node index.js
+ */ 
+
 const
-  fs = require('fs'),
   Sequelize = require('sequelize'),
   express = require('express'),
   app = express(),

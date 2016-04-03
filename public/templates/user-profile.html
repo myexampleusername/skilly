@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>{{profile.nameFirst}} {{profile.nameLast}}</h2>
+  
+  <h3>Skills</h3>
+  <ul class="skills">
+    <li ng-repeat="skill in profile.skills">
+      {{skill.name}}
+    </li>
+  </ul>
+</div>

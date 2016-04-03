@@ -5,10 +5,26 @@ const bcrypt = require('bcrypt-nodejs');
 module.exports = function (sequelize) {
     const 
         User = sequelize.import("../model/user"),
-        Creds = sequelize.import("../model/creds");
+        Creds = sequelize.import("../model/creds"),
+        Skill = sequelize.import("../model/skill"),
+        JctUserSkill = sequelize.import("../model/jctUserSkill");
         
     User.hasOne(Creds);
     Creds.belongsTo(User);
+    
+    User.belongsToMany(Skill, {
+        foreignKey: "idUser",
+        through: {
+          model: JctUserSkill
+        }
+      });
+    
+      Skill.belongsToMany(User, {
+        foreignKey: "idSkill",
+        through: {
+          model: JctUserSkill
+        }
+      });
         
     return {
         create: function (req, res) {
@@ -59,7 +75,19 @@ module.exports = function (sequelize) {
             });
         },
         profile: function(req, res) {
-            
+            User.findOne({
+              where: {
+                id: req.params.id
+              },
+              attributes: ['nameFirst', 'nameLast', 'username', 'email', 'cell'],
+              include: [{
+                model: Skill,
+                attributes: ['name']
+              }]
+            })
+            .then(function(user) {
+              res.json(user);
+            });
         },
         current: function(req, res) {
             res.json(req.session.user || null);
@@ -82,9 +110,8 @@ module.exports = function (sequelize) {
                             if(err) throw err;
                             if(!isMatch) return res.json({message: 'invalid credentials'});
                             req.session.user = user;
-                            res.redirect('/dashboard');
-                            // res.sendfile('public/dashboard.html');
-                            //res.redirect('/dashboard');
+                            res.json(user);
+                            // res.redirect('/dashboard');
                         });
                 });
             });

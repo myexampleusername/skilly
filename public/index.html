@@ -1,173 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="skillyApp">
 
 <head>
     <script src="bower_components/lodash/lodash.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
     <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <script src="js/factory.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/controller.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/user/user-service.js"></script>
-    <script type="text/javascript" src="js/user/user-controller.js"></script>
-    <script type="text/javascript" src="js/nav.js"></script>
     <title>Skilly</title>
 </head>
 
 <body>
     <div id="container" class="container">
-        <nav id="nav"></nav>
-        <main>
-        </main>
-        <!-- Modal -->
-        <!-- Modal -->
-        <div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <br>
-                    <div class="bs-example bs-example-tabs">
-                        <ul id="myTab" class="nav nav-tabs">
-                            <li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>
-                            <li class=""><a href="#signup" data-toggle="tab">Register</a></li>
-                            <li class=""><a href="#why" data-toggle="tab">Why?</a></li>
-                        </ul>
-                    </div>
-                    <div class="modal-body">
-                        <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane fade in" id="why">
-                                <p>We need this information so that you can receive access to the site and its content. Rest assured your information will not be sold, traded, or given to anyone.</p>
-                                <p></p>
-                                <br> Please contact
-                                <a mailto:href="max@operationspark.org"></a>max@operationspark.org</a> for any other inquiries.</p>
-                            </div>
-                            <div class="tab-pane fade active in" id="signin">
-                                <form id="form-signin" class="form-horizontal">
-                                    <fieldset>
-                                        <!-- Sign In Form -->
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                            <label class="control-label" for="username">Username:</label>
-                                            <div class="controls">
-                                                <input required="" id="username" name="username" type="text" class="form-control" placeholder="madSkillz" class="input-medium" required="">
-                                            </div>
-                                        </div>
-
-                                        <!-- Password input-->
-                                        <div class="control-group">
-                                            <label class="control-label" for="password">Password:</label>
-                                            <div class="controls">
-                                                <input required="" id="password" name="password" class="form-control" type="password" placeholder="********" class="input-medium">
-                                            </div>
-                                        </div>
-
-                                        <!-- Multiple Checkboxes (inline) -->
-                                        <div class="control-group">
-                                            <label class="control-label" for="rememberme"></label>
-                                            <div class="controls">
-                                                <label class="checkbox inline" for="rememberme-0">
-                                                    <input type="checkbox" name="rememberme" id="rememberme-0" value="Remember me"> Remember me
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <!-- Button -->
-                                        <div class="control-group">
-                                            <label class="control-label" for="signin"></label>
-                                            <div class="controls">
-                                                <button id="signin" name="signin" class="btn btn-success">Sign In</button>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="signup">
-                                <form id="form-signup" class="form-horizontal">
-                                    <fieldset>
-                                        <!-- Sign Up Form -->
-                                        
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                            <label class="control-label" for="nameFirst">First Name:</label>
-                                            <div class="controls">
-                                                <input id="nameFirst" name="nameFirst" class="form-control" type="text" placeholder="Claire" class="input-large" required="">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                            <label class="control-label" for="nameLast">First Last:</label>
-                                            <div class="controls">
-                                                <input id="nameLast" name="nameLast" class="form-control" type="text" placeholder="Danes" class="input-large" required="">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                            <label class="control-label" for="Email">Email:</label>
-                                            <div class="controls">
-                                                <input id="Email" name="Email" class="form-control" type="text" placeholder="claire@operationspark.org" class="input-large" required="">
-                                            </div>
-                                        </div>
-
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                            <label class="control-label" for="username">Username:</label>
-                                            <div class="controls">
-                                                <input id="username" name="username" class="form-control" type="text" placeholder="madSkillz" class="input-large" required="">
-                                            </div>
-                                        </div>
-
-                                        <!-- Password input-->
-                                        <div class="control-group">
-                                            <label class="control-label" for="password">Password:</label>
-                                            <div class="controls">
-                                                <input id="password" name="password" class="form-control" type="password" placeholder="********" class="input-large" required="">
-                                                <em>1-8 Characters</em>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Multiple Radios (inline) -->
-                                        <br>
-                                        <div class="control-group">
-                                            <label class="control-label" for="humancheck">Humanity Check:</label>
-                                            <div class="controls">
-                                                <label class="radio inline" for="humancheck-0">
-                                                    <input type="radio" name="humancheck" id="humancheck-0" value="robot" checked="checked">I'm a Robot</label>
-                                                <label class="radio inline" for="humancheck-1">
-                                                    <input type="radio" name="humancheck" id="humancheck-1" value="human">I'm Human</label>
-                                            </div>
-                                        </div>
-
-                                        <!-- Button -->
-                                        <div class="control-group">
-                                            <label class="control-label" for="confirmsignup"></label>
-                                            <div class="controls">
-                                                <button id="confirmsignup" name="confirmsignup" class="btn btn-success">Sign Up</button>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <center>
-                            <button id="btn-close-auth" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </center>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ng-include src="'/templates/nav.html'"></ng-include>
+        <main ng-view></main>
     </div>
-    <script>
-        $(document).ready(function() {
-            $(function(){
-                $("#nav").load("nav.html");
-            });
-        });
-    </script>
 </body>
 
 </html>
