@@ -3,7 +3,7 @@
   
   <ul class="users">
     <li ng-repeat="user in users" class="thumbnail">
-      <a href="#/user/{{user.id}}/profile">{{user.nameFirst}} {{user.nameLast}}</a>
+      <a href="#/user/{{user.id}}/profile">{{getNameForUser(user)}}</a>
     </li>
   </ul>
 </div>

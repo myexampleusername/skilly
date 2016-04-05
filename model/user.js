@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     idTitle: {
       type: DataTypes.INTEGER(10),
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'title',
         key: 'id'

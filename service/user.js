@@ -9,8 +9,8 @@ module.exports = function (sequelize) {
         Skill = sequelize.import("../model/skill"),
         JctUserSkill = sequelize.import("../model/jctUserSkill");
         
-    User.hasOne(Creds);
-    Creds.belongsTo(User);
+    User.hasOne(Creds, {foreignKey: 'idUser'});
+    Creds.belongsTo(User, {foreignKey: 'idUser'});
     
     User.belongsToMany(Skill, {
         foreignKey: "idUser",

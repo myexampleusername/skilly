@@ -8,6 +8,10 @@ skillyController.controller('HomeController', ['$scope', 'User',
   function($scope, User) {
     User.get().then(onUsers, onError);
     
+    $scope.getNameForUser = function (user) {
+      return user.nameFirst ? `${user.nameFirst} ${user.nameLast}` : user.username;
+    };
+    
     function onUsers(users) { $scope.users = users.data; }
     function onError(err) { console.dir(err); }
   }
@@ -25,7 +29,15 @@ skillyController.controller('UserProfileController', ['$scope', '$routeParams', 
   function($scope, $routeParams, User) {
     User.profile($routeParams.id).then(onProfile, onError);
     
-    function onProfile(response) { $scope.profile = response.data; }
+    $scope.getNameForUser = function (user) {
+      console.log(user);
+      return user.nameFirst ? `${user.nameFirst} ${user.nameLast}` : user.username;
+    };
+    
+    function onProfile(response) { 
+      $scope.profile = response.data; 
+      $scope.name = $scope.getNameForUser(response.data);
+    }
     function onError(err) { console.dir(err); }
   }
 ]);
@@ -51,7 +63,7 @@ skillyController.controller('NavController', ['$scope', '$http', 'User',
       User.deauth().then(onDeauth, onError);
     };
 
-    function onUser(user) { $scope.user = user; }
+    function onUser(user) { $scope.user = user.data; }
     function onDeauth() { $scope.user = null; }
     function onError(err) { console.dir(err); }
   }

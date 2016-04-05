@@ -13,6 +13,9 @@ userService.service('User', ['request',
       get: function(id) {
         return request.promise(id ? `user/${id}` : 'user', request.get);
       },
+      /**
+       * @return Promise : Returns a promise representing the http request.
+       */ 
       profile: function(id) {
         return request.promise(`user/${id}/profile`, request.get);
       },

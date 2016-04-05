@@ -6,7 +6,7 @@ var promiseFactory = angular.module('promiseFactory', []);
 /**
  * The Request factory returns an API to create $q promisified $http requests.
  * 
- * method: promise returns a $q promise wrapping an $http request.
+ * promise: promise returns a $q promise wrapping an $http request.
  * Request also contains an enumeration of http verbs, get, post, etc, to avoid 
  * use of Strings throughout the application.
  */

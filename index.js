@@ -15,7 +15,10 @@ const
   app = express(),
   session = require('express-session'),
   sessionFileStore = require('session-file-store'),
+  passport = require('passport'),
+  flash = require('connect-flash'),
   morgan = require('morgan'),
+  cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   path = require('path'),
   uuid = require('uuid');
@@ -26,6 +29,7 @@ let
 
 app
   .use(morgan('dev'))
+  .use(cookieParser())
   .use(session({
     genid: function(req) {
       return uuid.v4();
@@ -36,6 +40,9 @@ app
     resave: true,
     store: new FileStore()
   }))
+  .use(passport.initialize())
+  .use(passport.session())
+  .use(flash())
   // .use(function printSession(req, res, next) {
   //   console.log('req.session', req.session);
   //   return next();
@@ -43,6 +50,15 @@ app
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({extended: true}))
   .use(express.static(path.join(__dirname, '/public')));
+
+  
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 module.exports.close = function() {
   console.log('shutting down the server...');
@@ -67,6 +83,8 @@ var sequelize = new Sequelize('skilly', process.env.C9_USER.slice(0, 16), '', {
 const 
   userService = require("./service/user")(sequelize),
   twitterService = require("./service/twitter")(sequelize);
+
+require('./config/passport')(passport, sequelize);
 
 //sync the model with the database
 sequelize.sync().then(function(err) {
@@ -101,6 +119,21 @@ sequelize.sync().then(function(err) {
 
   app.route('/user/:id/twitter')
     .get(twitterService.get);
+    
+  app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+  // the callback after google has authenticated the user
+  app.get('/auth/google/callback',
+    passport.authenticate('google', {
+            successRedirect : '/#/dashboard',
+            failureRedirect : '/'
+    }));
+    
+  // route for logging out
+  app.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
+  });
   
   server = app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() {
     var addr = server.address();
