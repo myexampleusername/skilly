@@ -74,8 +74,7 @@ module.exports = function(passport, sequelize) {
         callbackURL: config.google.callbackURL
     },
     function(token, refreshToken, profile, done) {
-        // make the code asynchronous
-        // User.findOne won't fire until we have all our data back from Google
+        // process on next tick //
         process.nextTick(function() {
             Google.findOne({
               where: { idGoogle: profile.id }
